@@ -13,5 +13,5 @@
 ### 引入
 
 ```
-compile 'com.watayouxiang:DemoShell:1.0.0'
+implementation 'com.watayouxiang:DemoShell:1.0.0'
 ```
