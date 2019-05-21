@@ -1,7 +1,5 @@
 package com.wata.myapplication;
 
-import android.os.Bundle;
-
 import com.watayouxiang.demoshell.BaseActivity;
 
 public class HiActivity extends BaseActivity {
@@ -13,10 +11,5 @@ public class HiActivity extends BaseActivity {
     @Override
     protected CharSequence getPageTitle() {
         return "新的页面";
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
-
     }
 }

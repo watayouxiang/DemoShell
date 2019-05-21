@@ -41,12 +41,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract @LayoutRes
     int getRootViewId();
 
-    protected abstract CharSequence getPageTitle();
+    protected CharSequence getPageTitle(){
+        return null;
+    }
 
     protected boolean showBackBtn() {
         return true;
     }
 
-    protected abstract void initView(Bundle savedInstanceState);
+    protected void initView(Bundle savedInstanceState) {
+    }
 
 }

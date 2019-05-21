@@ -1,6 +1,5 @@
 package com.wata.myapplication;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,17 +7,6 @@ import com.watayouxiang.demoshell.ListActivity;
 import com.watayouxiang.demoshell.ListData;
 
 public class MainActivity extends ListActivity {
-
-    @Override
-    protected CharSequence getPageTitle() {
-        return null;
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
-
-    }
-
     @Override
     protected ListData getListData() {
         return new ListData()
