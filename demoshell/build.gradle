@@ -21,7 +21,7 @@ publish {
     userOrg = 'watayouxiang'
     groupId = 'com.watayouxiang'
     artifactId = 'DemoShell'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'quick build your demo'
     website = 'https://github.com/watayouxiang/DemoShell'
 }
