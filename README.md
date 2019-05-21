@@ -10,7 +10,7 @@
 仓库地址 [https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/)
 
 ```
-implementation 'com.watayouxiang:DemoShell:1.0.0'
+implementation 'com.watayouxiang:DemoShell:1.0.1'
 ```
 
 ### 3.使用
