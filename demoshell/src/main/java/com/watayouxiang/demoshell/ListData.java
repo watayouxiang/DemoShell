@@ -13,14 +13,30 @@ public class ListData extends ArrayList<ListBean> {
         return this;
     }
 
+    // ============================================================================
+    // 标题
+    // ============================================================================
+
     public ListData addSection(CharSequence sectionName) {
         return addItem(sectionName, null);
     }
 
+    // ============================================================================
+    // 点击事件
+    // ============================================================================
+
     public ListData addClick(View.OnClickListener listener) {
-        String TAG_CLICK = " [点击事件] ";
-        return addItem(TAG_CLICK + listener.getClass().getSimpleName(), listener);
+        return addClick(listener.getClass().getSimpleName(), listener);
     }
+
+    public ListData addClick(String name, View.OnClickListener listener) {
+        String TAG_CLICK = " [点击事件] ";
+        return addItem(TAG_CLICK + name, listener);
+    }
+
+    // ============================================================================
+    // 打开Activity
+    // ============================================================================
 
     public ListData addActivity(final ContextWrapper context, final Class<?> cls) {
         return addActivity(context, cls.getSimpleName(), cls);
@@ -35,6 +51,10 @@ public class ListData extends ArrayList<ListBean> {
             }
         });
     }
+
+    // ============================================================================
+    // 打开网页
+    // ============================================================================
 
     public ListData addWeb(final ContextWrapper context, final String url) {
         return addWeb(context, getLastUrlTxt(url), url);

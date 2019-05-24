@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
     }
 }
 
@@ -17,11 +16,4 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
-publish {
-    userOrg = 'watayouxiang'
-    groupId = 'com.watayouxiang'
-    artifactId = 'DemoShell'
-    publishVersion = '1.0.1'
-    desc = 'quick build your demo'
-    website = 'https://github.com/watayouxiang/DemoShell'
-}
+apply from: "bintrayUpload.gradle"

@@ -11,15 +11,13 @@ public class MainActivity extends ListActivity {
     protected ListData getListData() {
         return new ListData()
                 .addSection("这是标题")
-                .addClick(new HiClick())
-                .addWeb(this, "https://www.baidu.com")
-                .addActivity(this, "Android知识点", HiActivity.class);
-    }
-
-    class HiClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "hi~", Toast.LENGTH_SHORT).show();
-        }
+                .addClick("say hi", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(), "hi~", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addWeb(this, "打开百度", "https://www.baidu.com")
+                .addActivity(this, "打开Activity", HiActivity.class);
     }
 }
