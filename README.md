@@ -1,42 +1,24 @@
 # DemoShell
 
 
-### 1.简介
+## 1.简介
 
-快速构建你的demo项目的外壳
+- 安卓开发，每次写demo总要花些时间搭下架子，写一些重复且没意义的代码。
+	- 从而写了该项目，帮助我自己快速搭建起demo项目的外壳。
+- Demo项目的`README.md`文档一般就是“文件索引目录”，那么能不能用代码自动生成呢？
+	- 从而写了个自动生成工具`MdFileTool.java`
 
-### 2.引入
-
-仓库地址 [https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/)
+## 2.引入
 
 ```
 implementation 'com.watayouxiang:DemoShell:1.0.1'
 ```
 
-### 3.使用
+最新版本请到 [jcenter仓库](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/) 查看
 
-- md文档生成工具的使用
+## 3.使用
 
-```
-public static void main(String[] args) {
-    new MdFileTool().start(new MdFileData() {
-        @Override
-        public String getInDirPath() {
-            return System.getProperty("user.dir") + "/app/src/main/java/com/wata/myapplication";
-        }
-
-        @Override
-        public String getOutFilePath() {
-            return System.getProperty("user.dir") + "/MdFileTool生成的文件.md";
-        }
-
-        @Override
-        public String getProjectUrl() {
-            return "https://github.com/watayouxiang/DemoShell/tree/master";
-        }
-    });
-}
-```
+### 功能一：快速搭建demo页面
 
 - 基本页的使用
 
@@ -73,6 +55,31 @@ public class MainActivity extends ListActivity {
             Toast.makeText(v.getContext(), "hi~", Toast.LENGTH_SHORT).show();
         }
     }
+}
+```
+
+### 功能二：快速生成`README.md`文件索引目录
+
+- md文档生成工具的使用
+
+```
+public static void main(String[] args) {
+    new MdFileTool().start(new MdFileData() {
+        @Override
+        public String getInDirPath() {
+            return System.getProperty("user.dir") + "/app/src/main/java/com/wata/myapplication";
+        }
+
+        @Override
+        public String getOutFilePath() {
+            return System.getProperty("user.dir") + "/MdFileTool生成的文件.md";
+        }
+
+        @Override
+        public String getProjectUrl() {
+            return "https://github.com/watayouxiang/DemoShell/tree/master";
+        }
+    });
 }
 ```
 
