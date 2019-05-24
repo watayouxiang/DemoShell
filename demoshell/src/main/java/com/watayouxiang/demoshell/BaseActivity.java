@@ -16,9 +16,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getRootViewId());
         //title
         CharSequence pageTitle = getPageTitle();
-        if (pageTitle != null) {
-            setTitle(pageTitle);
-        }
+        CharSequence title = pageTitle != null ? pageTitle : getClass().getSimpleName();
+        setTitle(title);
         //back btn
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -41,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract @LayoutRes
     int getRootViewId();
 
-    protected CharSequence getPageTitle(){
+    protected CharSequence getPageTitle() {
         return null;
     }
 

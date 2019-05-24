@@ -8,6 +8,11 @@ import com.watayouxiang.demoshell.ListData;
 
 public class MainActivity extends ListActivity {
     @Override
+    protected boolean showBackBtn() {
+        return false;
+    }
+
+    @Override
     protected ListData getListData() {
         return new ListData()
                 .addSection("这是标题")
