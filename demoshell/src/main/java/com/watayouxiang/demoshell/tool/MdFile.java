@@ -25,21 +25,26 @@ class MdFile {
     /**
      * 获取文件的相对路径
      *
-     * @return
+     * @return 文件相对路径
      */
-    private String getRelativePath() {
-        String filePath = file.getAbsolutePath();
+    private String getFileRelativePath() {
+        String fileAbsolutePath = file.getAbsolutePath();
         String projectPath = System.getProperty("user.dir");
-        return filePath.substring(projectPath != null ? projectPath.length() : 0);
+        if (projectPath == null) {
+            throw new RuntimeException("-- projectPath is null --");
+        }
+        return fileAbsolutePath.substring(projectPath.length());
     }
 
     /**
-     * 获取链接txt
+     * 获取链接
      *
      * @param projectUrl 项目url
-     * @return
+     * @return 链接
      */
     String getLinkTxt(String projectUrl) {
-        return getTab() + "- [" + file.getName() + "](" + projectUrl + getRelativePath() + ")";
+        String fileRelativePath = getFileRelativePath();
+        fileRelativePath = fileRelativePath.replace(File.separator, "/");
+        return getTab() + "- [" + file.getName() + "](" + projectUrl + fileRelativePath + ")";
     }
 }

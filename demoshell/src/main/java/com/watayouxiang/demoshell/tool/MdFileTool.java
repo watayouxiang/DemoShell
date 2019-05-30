@@ -10,21 +10,26 @@ import java.util.List;
 
 public class MdFileTool {
 
+    /**
+     * 开始生成 markdown 文件
+     *
+     * @param data 一些配置数据
+     */
     public void start(MdFileData data) {
         //获取 inDir 的目录结构
         File inDir = new File(data.getInDirPath());
         LinkedList<MdFile> localFiles = new LinkedList<>();
         getFileStructure(inDir, 0, localFiles);
         //获取字符串列表
-        List<String> stringList = getStringList(localFiles, data.getProjectUrl());
+        List<String> linkList = getStringList(localFiles, data.getProjectUrl());
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
-        saveStringList(stringList, outFile);
+        saveStringList(linkList, outFile);
         //打印回显
-        for (String string : stringList) {
+        for (String string : linkList) {
             System.out.println(string);
         }
-        System.out.println(outFile.getAbsoluteFile());
+        System.out.println("文件输出路径：" + outFile.getAbsoluteFile());
     }
 
     /**
@@ -32,7 +37,7 @@ public class MdFileTool {
      *
      * @param localFiles 本地文件集合
      * @param projectUrl 项目的 url
-     * @return
+     * @return 字符串列表
      */
     private List<String> getStringList(LinkedList<MdFile> localFiles, String projectUrl) {
         if (localFiles == null) return new ArrayList<>();

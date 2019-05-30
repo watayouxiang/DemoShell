@@ -12,7 +12,7 @@ class BrowserClient extends WebViewClient {
 
     private List<BrowserListener> mListeners;
 
-    public BrowserClient(List<BrowserListener> listener) {
+    BrowserClient(List<BrowserListener> listener) {
         this.mListeners = listener;
     }
 

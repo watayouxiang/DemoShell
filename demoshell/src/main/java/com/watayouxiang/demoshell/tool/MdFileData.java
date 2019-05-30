@@ -2,23 +2,23 @@ package com.watayouxiang.demoshell.tool;
 
 public interface MdFileData {
     /**
-     * 获取哪个文件目录
+     * 输入文件夹
      *
-     * @return
+     * @return 输入文件夹路径
      */
     String getInDirPath();
 
     /**
-     * 存储到哪个文件
+     * 输出文件
      *
-     * @return
+     * @return 输出文件路径
      */
     String getOutFilePath();
 
     /**
      * 项目地址url
      *
-     * @return
+     * @return 项目地址url
      */
     String getProjectUrl();
 }
