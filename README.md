@@ -11,7 +11,7 @@
 ## 2.引入
 
 ```
-implementation 'com.watayouxiang:DemoShell:1.0.1'
+implementation 'com.watayouxiang:DemoShell:1.0.4'
 ```
 
 最新版本请到 [jcenter仓库](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/) 查看
@@ -44,16 +44,14 @@ public class MainActivity extends ListActivity {
     protected ListData getListData() {
         return new ListData()
                 .addSection("这是标题")
-                .addClick(new HiClick())
+                .addClick(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(v.getContext(), "hi~", Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .addWeb(this, "https://www.baidu.com")
-                .addActivity(this, "Android知识点", HiActivity.class);
-    }
-
-    class HiClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "hi~", Toast.LENGTH_SHORT).show();
-        }
+                .addActivity(this, HiActivity.class);
     }
 }
 ```
@@ -64,22 +62,22 @@ public class MainActivity extends ListActivity {
 
 ```
 public static void main(String[] args) {
-    new MdFileTool().start(new MdFileData() {
-        @Override
-        public String getInDirPath() {
-            return System.getProperty("user.dir") + "/app/src/main/java/com/wata/myapplication";
-        }
+	new MdFileTool().start(new MdFileData() {
+	    @Override
+	    public String getInDirPath() {
+		return System.getProperty("user.dir") + "/app/src/main/java/com/watayouxiang/androiddemo";
+	    }
 
-        @Override
-        public String getOutFilePath() {
-            return System.getProperty("user.dir") + "/MdFileTool生成的文件.md";
-        }
+	    @Override
+	    public String getOutFilePath() {
+		return System.getProperty("user.dir") + "/README.md";
+	    }
 
-        @Override
-        public String getProjectUrl() {
-            return "https://github.com/watayouxiang/DemoShell/tree/master";
-        }
-    });
+	    @Override
+	    public String getProjectUrl() {
+		return "https://github.com/watayouxiang/AndroidDemo/tree/master";
+	    }
+	});
 }
 ```
 
