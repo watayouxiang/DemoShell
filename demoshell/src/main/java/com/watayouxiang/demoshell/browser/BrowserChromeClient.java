@@ -1,4 +1,4 @@
-package com.watayouxiang.demoshell;
+package com.watayouxiang.demoshell.browser;
 
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog;
 import java.util.List;
 
 class BrowserChromeClient extends WebChromeClient {
-
     private List<BrowserListener> mListeners;
 
     BrowserChromeClient(List<BrowserListener> listener) {
@@ -19,25 +18,19 @@ class BrowserChromeClient extends WebChromeClient {
     @Override
     public void onReceivedTitle(WebView view, String title) {
         super.onReceivedTitle(view, title);
-        if (title != null) {
-            for (BrowserListener listener : mListeners) {
-                listener.onReceivedTitle(title);
-            }
+        for (BrowserListener listener : mListeners) {
+            listener.onReceivedTitle(view, title);
         }
     }
 
-    //不支持js的alert弹窗，需要自己监听然后通过dialog弹窗
     @Override
     public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
+        //由于webView不支持js的alert弹窗，所以使用dialog弹窗替代
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(webView.getContext());
         dialogBuilder.setMessage(message).setPositiveButton("确定", null);
         dialogBuilder.setCancelable(true);
         dialogBuilder.create().show();
-
-        //注意:
-        //必须要这一句代码:result.confirm()表示:
-        //处理结果为确定状态同时唤醒WebCore线程
-        //否则不能继续点击按钮
+        //表示处理结果为确定状态，同时唤醒WebCore线程，否则不能继续点击按钮
         result.confirm();
         return true;
     }
@@ -46,7 +39,7 @@ class BrowserChromeClient extends WebChromeClient {
     public void onProgressChanged(WebView view, int newProgress) {
         if (newProgress >= 0 && newProgress <= 100) {
             for (BrowserListener listener : mListeners) {
-                listener.onProgressChanged(newProgress);
+                listener.onProgressChanged(view, newProgress);
             }
         }
     }

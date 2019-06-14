@@ -1,4 +1,4 @@
-package com.watayouxiang.demoshell;
+package com.watayouxiang.demoshell.browser;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,8 +11,7 @@ import android.webkit.WebView;
 import java.util.ArrayList;
 import java.util.List;
 
-class Browser extends WebView {
-
+public class Browser extends WebView {
     private List<BrowserListener> mListeners = new ArrayList<>();
 
     public Browser(Context context) {
@@ -25,11 +24,8 @@ class Browser extends WebView {
 
     public Browser(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setDefaultSetting();
-        setClient();
-    }
-
-    private void setClient() {
+        //设置默认WebSettings
+        setDefaultWebSettings();
         //处理Javascript的对话框、网站图标、网站title、加载进度等
         setWebChromeClient(new BrowserChromeClient(mListeners));
         //处理各种通知、请求事件
@@ -40,7 +36,7 @@ class Browser extends WebView {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private void setDefaultSetting() {
+    private void setDefaultWebSettings() {
         WebSettings ws = getSettings();
         /** js交互 */
         // 告诉WebView启用JavaScript执行。默认的是false。
@@ -77,27 +73,40 @@ class Browser extends WebView {
         /** 其他设置 */
         // 自动加载图片
         ws.setLoadsImagesAutomatically(true);
-        // webview从5.0开始默认不允许混合模式,https中不能加载http资源,需要设置开启。
+        // WebView从5.0开始默认不允许混合模式,https中不能加载http资源,需要设置开启。
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
     }
 
+    /**
+     * 设置监听
+     *
+     * @param listener 监听器
+     */
     public void setListener(BrowserListener listener) {
         if (listener != null && !mListeners.contains(listener)) {
             mListeners.add(listener);
         }
     }
 
+    /**
+     * 释放资源
+     */
     public void releaseRes() {
         ViewGroup parent = (ViewGroup) getParent();
-        if (parent != null) parent.removeView(this);
+        if (parent != null) {
+            parent.removeView(this);
+        }
         removeAllViews();
         loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
         stopLoading();
         setWebChromeClient(null);
         setWebViewClient(null);
         destroy();
-        mListeners = null;
+        if (mListeners != null) {
+            mListeners.clear();
+            mListeners = null;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.watayouxiang.demoshell;
+package com.watayouxiang.demoshell.browser;
 
 import android.graphics.Bitmap;
 import android.net.http.SslError;
@@ -9,7 +9,6 @@ import android.webkit.WebViewClient;
 import java.util.List;
 
 class BrowserClient extends WebViewClient {
-
     private List<BrowserListener> mListeners;
 
     BrowserClient(List<BrowserListener> listener) {
@@ -20,7 +19,7 @@ class BrowserClient extends WebViewClient {
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
         for (BrowserListener listener : mListeners) {
-            listener.onPageStarted(url);
+            listener.onPageStarted(view, url, favicon);
         }
     }
 
@@ -28,7 +27,7 @@ class BrowserClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         for (BrowserListener listener : mListeners) {
-            listener.onPageFinished(url, view.canGoBack());
+            listener.onPageFinished(view, url);
         }
     }
 

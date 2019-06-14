@@ -1,9 +1,14 @@
 package com.watayouxiang.demoshell;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
+
+import com.watayouxiang.demoshell.browser.Browser;
+import com.watayouxiang.demoshell.browser.BrowserListener;
 
 public class BrowserActivity extends BaseActivity {
 
@@ -37,23 +42,23 @@ public class BrowserActivity extends BaseActivity {
     private void setWebListener(Browser webBrowser, final ProgressBar progressBar) {
         webBrowser.setListener(new BrowserListener() {
             @Override
-            public void onPageStarted(String url) {
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
-            public void onPageFinished(String url, boolean canGoBack) {
+            public void onPageFinished(WebView view, String url) {
                 progressBar.setVisibility(View.GONE);
             }
 
             @Override
-            public void onReceivedTitle(String title) {
+            public void onReceivedTitle(WebView view, String title) {
                 setTitle(title);
             }
 
             @Override
-            public void onProgressChanged(int progress) {
-                progressBar.setProgress(progress);
+            public void onProgressChanged(WebView view, int newProgress) {
+                progressBar.setProgress(newProgress);
             }
         });
     }
