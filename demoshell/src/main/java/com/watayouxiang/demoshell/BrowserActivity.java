@@ -7,8 +7,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-import com.watayouxiang.demoshell.browser.TWebView;
-import com.watayouxiang.demoshell.browser.TListener;
+import com.watayouxiang.demoshell.webview.TWebView;
+import com.watayouxiang.demoshell.webview.TListener;
 
 public class BrowserActivity extends BaseActivity {
     private TWebView mTWebView;

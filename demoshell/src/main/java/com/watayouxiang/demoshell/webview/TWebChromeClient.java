@@ -1,4 +1,4 @@
-package com.watayouxiang.demoshell.browser;
+package com.watayouxiang.demoshell.webview;
 
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;

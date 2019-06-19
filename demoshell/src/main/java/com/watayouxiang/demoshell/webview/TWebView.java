@@ -1,4 +1,4 @@
-package com.watayouxiang.demoshell.browser;
+package com.watayouxiang.demoshell.webview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
