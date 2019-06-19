@@ -11,4 +11,3 @@ class ListBean {
         this.listener = listener;
     }
 }
-

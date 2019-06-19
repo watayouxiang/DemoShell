@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.watayouxiang.demoshell.ListActivity;
 import com.watayouxiang.demoshell.ListData;
 
-public class MainActivity extends ListActivity {
+public class TestListActivity extends ListActivity {
     @Override
     protected boolean showBackBtn() {
         return false;
@@ -23,6 +23,7 @@ public class MainActivity extends ListActivity {
                     }
                 })
                 .addWeb(this, "打开百度", "https://www.baidu.com")
-                .addActivity(this, "打开Activity", HiActivity.class);
+                .addActivity(this, "打开Activity", TestBaseActivity.class)
+                .addActivity(this, TestDemoActivity.class);
     }
 }

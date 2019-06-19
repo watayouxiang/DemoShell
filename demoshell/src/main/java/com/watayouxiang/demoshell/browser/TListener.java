@@ -3,7 +3,7 @@ package com.watayouxiang.demoshell.browser;
 import android.graphics.Bitmap;
 import android.webkit.WebView;
 
-public interface BrowserListener {
+public interface TListener {
 
     void onPageStarted(WebView view, String url, Bitmap favicon);
 

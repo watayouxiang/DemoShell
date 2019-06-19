@@ -8,11 +8,6 @@ import java.util.ArrayList;
 
 public class ListData extends ArrayList<ListBean> {
 
-    private ListData addItem(CharSequence name, View.OnClickListener listener) {
-        this.add(new ListBean(name, listener));
-        return this;
-    }
-
     // ============================================================================
     // 标题
     // ============================================================================
@@ -119,6 +114,13 @@ public class ListData extends ArrayList<ListBean> {
                 context.startActivity(intent);
             }
         });
+    }
+
+    //==============================================================================================
+
+    private ListData addItem(CharSequence name, View.OnClickListener listener) {
+        this.add(new ListBean(name, listener));
+        return this;
     }
 
     private CharSequence getLastUrlTxt(String url) {

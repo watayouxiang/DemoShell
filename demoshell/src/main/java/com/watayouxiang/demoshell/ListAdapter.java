@@ -11,27 +11,35 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
+    private final List<ListBean> mData = new ArrayList<>();
 
-    private final List<ListBean> mList;
-
-    ListAdapter(List<ListBean> list) {
-        mList = list;
+    /**
+     * 覆盖数据
+     *
+     * @param data 数据
+     */
+    void setNewData(List<ListBean> data) {
+        mData.clear();
+        if (data != null) {
+            mData.addAll(data);
+        }
     }
 
     @NonNull
     @Override
     public ListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.base_list_item, viewGroup, false);
+        View view = inflater.inflate(R.layout.list_item, viewGroup, false);
         return new ListHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListHolder holder, int i) {
-        ListBean bean = mList.get(i);
+        ListBean bean = mData.get(i);
         if (bean.name != null && bean.listener != null) {
             setItemStyle(holder.tv_name);
             holder.tv_name.setText(bean.name);
@@ -63,7 +71,7 @@ class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mData.size();
     }
 
     class ListHolder extends RecyclerView.ViewHolder {

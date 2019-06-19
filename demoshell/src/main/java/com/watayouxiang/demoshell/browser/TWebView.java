@@ -11,25 +11,25 @@ import android.webkit.WebView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Browser extends WebView {
-    private List<BrowserListener> mListeners = new ArrayList<>();
+public class TWebView extends WebView {
+    private List<TListener> mListeners = new ArrayList<>();
 
-    public Browser(Context context) {
+    public TWebView(Context context) {
         this(context, null);
     }
 
-    public Browser(Context context, AttributeSet attrs) {
+    public TWebView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public Browser(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         //设置默认WebSettings
         setDefaultWebSettings();
         //处理Javascript的对话框、网站图标、网站title、加载进度等
-        setWebChromeClient(new BrowserChromeClient(mListeners));
+        setWebChromeClient(new TWebChromeClient(mListeners));
         //处理各种通知、请求事件
-        setWebViewClient(new BrowserClient(mListeners));
+        setWebViewClient(new TWebViewClient(mListeners));
         //需要添加如下代码，否则点击H5输入框，无法弹出键盘
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -84,7 +84,7 @@ public class Browser extends WebView {
      *
      * @param listener 监听器
      */
-    public void setListener(BrowserListener listener) {
+    public void setListener(TListener listener) {
         if (listener != null && !mListeners.contains(listener)) {
             mListeners.add(listener);
         }

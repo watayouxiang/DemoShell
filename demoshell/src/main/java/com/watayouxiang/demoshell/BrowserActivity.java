@@ -7,16 +7,15 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
-import com.watayouxiang.demoshell.browser.Browser;
-import com.watayouxiang.demoshell.browser.BrowserListener;
+import com.watayouxiang.demoshell.browser.TWebView;
+import com.watayouxiang.demoshell.browser.TListener;
 
 public class BrowserActivity extends BaseActivity {
-
-    private Browser mBrowser;
+    private TWebView mTWebView;
 
     @Override
     protected int getRootViewId() {
-        return R.layout.base_web_activity;
+        return R.layout.activity_browser;
     }
 
     @Override
@@ -27,20 +26,20 @@ public class BrowserActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         ProgressBar progressBar = findViewById(R.id.progressBar);
-        mBrowser = findViewById(R.id.browser);
+        mTWebView = findViewById(R.id.browser);
         //设置字体默认缩放大小为50%
-        mBrowser.getSettings().setTextZoom(50);
+        mTWebView.getSettings().setTextZoom(50);
         //设置监听
-        setWebListener(mBrowser, progressBar);
+        setWebListener(mTWebView, progressBar);
         //加载网页
         String url = getIntent().getStringExtra("URL");
         if (url != null) {
-            mBrowser.loadUrl(url);
+            mTWebView.loadUrl(url);
         }
     }
 
-    private void setWebListener(Browser webBrowser, final ProgressBar progressBar) {
-        webBrowser.setListener(new BrowserListener() {
+    private void setWebListener(TWebView webBrowser, final ProgressBar progressBar) {
+        webBrowser.setListener(new TListener() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -67,8 +66,8 @@ public class BrowserActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (mBrowser.canGoBack()) {
-                    mBrowser.goBack();
+                if (mTWebView.canGoBack()) {
+                    mTWebView.goBack();
                 } else {
                     finish();
                 }
@@ -79,10 +78,10 @@ public class BrowserActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        if (mBrowser != null) {
-            mBrowser.releaseRes();
-            mBrowser = null;
-        }
         super.onDestroy();
+        if (mTWebView != null) {
+            mTWebView.releaseRes();
+            mTWebView = null;
+        }
     }
 }

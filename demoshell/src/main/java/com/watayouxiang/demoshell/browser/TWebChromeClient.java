@@ -8,17 +8,17 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.List;
 
-class BrowserChromeClient extends WebChromeClient {
-    private List<BrowserListener> mListeners;
+class TWebChromeClient extends WebChromeClient {
+    private List<TListener> mListeners;
 
-    BrowserChromeClient(List<BrowserListener> listener) {
+    TWebChromeClient(List<TListener> listener) {
         this.mListeners = listener;
     }
 
     @Override
     public void onReceivedTitle(WebView view, String title) {
         super.onReceivedTitle(view, title);
-        for (BrowserListener listener : mListeners) {
+        for (TListener listener : mListeners) {
             listener.onReceivedTitle(view, title);
         }
     }
@@ -38,7 +38,7 @@ class BrowserChromeClient extends WebChromeClient {
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
         if (newProgress >= 0 && newProgress <= 100) {
-            for (BrowserListener listener : mListeners) {
+            for (TListener listener : mListeners) {
                 listener.onProgressChanged(view, newProgress);
             }
         }

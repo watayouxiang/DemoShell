@@ -8,17 +8,17 @@ import android.webkit.WebViewClient;
 
 import java.util.List;
 
-class BrowserClient extends WebViewClient {
-    private List<BrowserListener> mListeners;
+class TWebViewClient extends WebViewClient {
+    private List<TListener> mListeners;
 
-    BrowserClient(List<BrowserListener> listener) {
+    TWebViewClient(List<TListener> listener) {
         this.mListeners = listener;
     }
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         super.onPageStarted(view, url, favicon);
-        for (BrowserListener listener : mListeners) {
+        for (TListener listener : mListeners) {
             listener.onPageStarted(view, url, favicon);
         }
     }
@@ -26,7 +26,7 @@ class BrowserClient extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        for (BrowserListener listener : mListeners) {
+        for (TListener listener : mListeners) {
             listener.onPageFinished(view, url);
         }
     }
