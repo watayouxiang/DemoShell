@@ -11,22 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListHolder> {
-    private final List<ListBean> mData = new ArrayList<>();
+    private final List<ListBean> mData;
 
-    /**
-     * 覆盖数据
-     *
-     * @param data 数据
-     */
-    void setNewData(List<ListBean> data) {
-        mData.clear();
-        if (data != null) {
-            mData.addAll(data);
-        }
+    ListAdapter(List<ListBean> date) {
+        this.mData = date;
     }
 
     @NonNull
