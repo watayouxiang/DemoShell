@@ -1,6 +1,7 @@
 package com.wata.myapplication;
 
 import android.view.View;
+import android.widget.Toast;
 
 import com.watayouxiang.demoshell.DemoActivity;
 import com.watayouxiang.demoshell.ListData;
@@ -16,7 +17,7 @@ public class TestDemoActivity extends DemoActivity {
         return new ListData().addClick("TestClick", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(v.getContext(), "onClick", Toast.LENGTH_SHORT).show();
             }
         });
     }

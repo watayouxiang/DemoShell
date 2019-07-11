@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#AACCCCCC"
-        android:foreground="?attr/selectableItemBackground"
-        android:padding="10dp"
-        android:text="文字说明"
-        android:textColor="#1A1A1A"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:background="#AACCCCCC"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="10dp"
+    android:text="文字说明"
+    android:textColor="#1A1A1A"
+    android:textSize="12sp" />
