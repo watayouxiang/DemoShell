@@ -11,7 +11,7 @@
 ## 2.引入
 
 ```
-implementation 'com.watayouxiang:DemoShell:1.0.5'
+implementation 'com.watayouxiang:DemoShell:1.0.6'
 ```
 
 最新版本请到 [jcenter仓库](https://dl.bintray.com/watayouxiang/maven/com/watayouxiang/DemoShell/) 查看
