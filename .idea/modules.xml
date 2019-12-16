@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DemoShell.iml" filepath="$PROJECT_DIR$/DemoShell.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/demoshell/demoshell.iml" filepath="$PROJECT_DIR$/demoshell/demoshell.iml" />
       <module fileurl="file://$PROJECT_DIR$/github_DemoShell.iml" filepath="$PROJECT_DIR$/github_DemoShell.iml" />
