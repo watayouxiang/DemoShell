@@ -10,7 +10,7 @@ class Test {
 
             @Override
             public String getOutFilePath() {
-                return System.getProperty("user.dir") + "/demoshell/src/main/java/com/watayouxiang/demoshell/Test.md";
+                return System.getProperty("user.dir") + "/demoshell/src/main/java/com/watayouxiang/demoshell/tool/Test.md";
             }
 
             @Override
