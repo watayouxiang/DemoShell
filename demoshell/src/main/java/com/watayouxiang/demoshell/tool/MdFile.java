@@ -2,7 +2,7 @@ package com.watayouxiang.demoshell.tool;
 
 import java.io.File;
 
-class MdFile {
+class MdFile implements Comparable<MdFile> {
     private File file;
     private int level;
 
@@ -46,5 +46,12 @@ class MdFile {
         String fileRelativePath = getFileRelativePath();
         fileRelativePath = fileRelativePath.replace(File.separator, "/");
         return getTab() + "- [" + file.getName() + "](" + projectUrl + fileRelativePath + ")";
+    }
+
+    @Override
+    public int compareTo(MdFile o) {
+        int num = level - o.level;
+        if (num != 0) return num;
+        return file.getName().compareTo(o.file.getName());
     }
 }

@@ -21,9 +21,9 @@ public class MdFileTool {
         File inDir = new File(data.getInDirPath());
         LinkedList<MdFile> localFiles = new LinkedList<>();
         getFileStructure(inDir, 0, localFiles);
+        Collections.sort(localFiles);
         //获取字符串列表
         List<String> linkList = getStringList(localFiles, data.getProjectUrl());
-        Collections.sort(linkList);
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
         saveStringList(linkList, outFile);
