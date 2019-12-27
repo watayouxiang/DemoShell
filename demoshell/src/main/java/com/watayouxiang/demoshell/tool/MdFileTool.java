@@ -18,37 +18,20 @@ public class MdFileTool {
     public void start(MdFileData data) {
         // 获取所有文件
         File inFile = new File(data.getInDirPath());
-        List<MdFile> inFileList = new LinkedList<>();
-        getFileList(inFile, 0, inFileList);
+        List<MdFile> files = new LinkedList<>();
+        getFiles(inFile, 0, files);
 
-        // 获取MD链接字符串列表
-        List<String> mdLinkList = getMdLinkList(inFileList, data.getProjectUrl());
+        // 获取MD行列表
+        List<String> lines = getLines(files, data.getProjectUrl());
 
         // 保存目录结构到 outFile
-        File outFile = saveMdLinkList(mdLinkList, data.getOutFilePath());
+        File outFile = saveFile(lines, data.getOutFilePath());
 
         // 打印回显
-        for (String mdLink : mdLinkList) {
-            System.out.println(mdLink);
+        for (String line : lines) {
+            System.out.println(line);
         }
         System.out.println("文件输出路径：" + outFile.getAbsoluteFile());
-    }
-
-    /**
-     * 获取MD链接列表
-     *
-     * @param inFileList MD文件列表
-     * @param projectUrl 项目的URL
-     * @return MD链接列表
-     */
-    private List<String> getMdLinkList(List<MdFile> inFileList, String projectUrl) {
-        if (inFileList == null) return null;
-        List<String> mdLinkList = new ArrayList<>(inFileList.size());
-        for (MdFile mdFile : inFileList) {
-            String link = mdFile.getLink(projectUrl);
-            mdLinkList.add(link);
-        }
-        return mdLinkList;
     }
 
     /**
@@ -58,7 +41,7 @@ public class MdFileTool {
      * @param outFilePath 输出文件路径
      * @return 文件
      */
-    private File saveMdLinkList(List<String> mdLinkList, String outFilePath) {
+    private File saveFile(List<String> mdLinkList, String outFilePath) {
         File outFile = new File(outFilePath);
         BufferedWriter writer = null;
         try {
@@ -83,13 +66,30 @@ public class MdFileTool {
     }
 
     /**
+     * 获取MD链接列表
+     *
+     * @param inFileList MD文件列表
+     * @param projectUrl 项目的URL
+     * @return MD链接列表
+     */
+    private List<String> getLines(List<MdFile> inFileList, String projectUrl) {
+        if (inFileList == null) return new ArrayList<>(0);
+        List<String> mdLinkList = new ArrayList<>(inFileList.size());
+        for (MdFile mdFile : inFileList) {
+            String link = mdFile.getLink(projectUrl);
+            mdLinkList.add(link);
+        }
+        return mdLinkList;
+    }
+
+    /**
      * 获取file下的所有文件，保存到fileList中
      *
      * @param file     文件
      * @param level    初始层级
      * @param fileList 文件集合
      */
-    private void getFileList(File file, int level, List<MdFile> fileList) {
+    private void getFiles(File file, int level, List<MdFile> fileList) {
         fileList.add(new MdFile(file, level));
         level++;
 
@@ -99,7 +99,7 @@ public class MdFileTool {
 
         for (File f : files) {
             // 如果目录下还有目录，那么递归遍历
-            getFileList(f, level, fileList);
+            getFiles(f, level, fileList);
         }
     }
 }
