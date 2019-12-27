@@ -19,12 +19,12 @@ public class MdFileTool {
         // 获取所有文件
         File inFile = new File(data.getInDirPath());
         List<MdFile> files = new LinkedList<>();
-        getFiles(inFile, 0, files);
+        getFiles(inFile, 0, data.getProjectUrl(), files);
 
-        // 获取MD行列表
-        List<String> lines = getLines(files, data.getProjectUrl());
+        // 获取MD行数据
+        List<String> lines = getLines(files);
 
-        // 保存目录结构到 outFile
+        // 保存到文件
         File outFile = saveFile(lines, data.getOutFilePath());
 
         // 打印回显
@@ -69,14 +69,13 @@ public class MdFileTool {
      * 获取MD链接列表
      *
      * @param inFileList MD文件列表
-     * @param projectUrl 项目的URL
      * @return MD链接列表
      */
-    private List<String> getLines(List<MdFile> inFileList, String projectUrl) {
+    private List<String> getLines(List<MdFile> inFileList) {
         if (inFileList == null) return new ArrayList<>(0);
         List<String> mdLinkList = new ArrayList<>(inFileList.size());
         for (MdFile mdFile : inFileList) {
-            String link = mdFile.getLink(projectUrl);
+            String link = mdFile.getLink();
             mdLinkList.add(link);
         }
         return mdLinkList;
@@ -85,12 +84,13 @@ public class MdFileTool {
     /**
      * 获取file下的所有文件，保存到fileList中
      *
-     * @param file     文件
-     * @param level    初始层级
-     * @param fileList 文件集合
+     * @param file       文件
+     * @param level      初始层级
+     * @param projectUrl 项目URL
+     * @param fileList   文件集合
      */
-    private void getFiles(File file, int level, List<MdFile> fileList) {
-        fileList.add(new MdFile(file, level));
+    private void getFiles(File file, int level, String projectUrl, List<MdFile> fileList) {
+        fileList.add(new MdFile(file, level, projectUrl));
         level++;
 
         // 当file不为目录 或者 报SecurityException错时，返回为null
@@ -99,7 +99,7 @@ public class MdFileTool {
 
         for (File f : files) {
             // 如果目录下还有目录，那么递归遍历
-            getFiles(f, level, fileList);
+            getFiles(f, level, projectUrl, fileList);
         }
     }
 }

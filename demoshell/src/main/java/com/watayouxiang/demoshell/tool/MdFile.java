@@ -3,12 +3,14 @@ package com.watayouxiang.demoshell.tool;
 import java.io.File;
 
 class MdFile {
-    private File file;
-    private int level;
+    private final File file;
+    private final int level;
+    private final String projectUrl;
 
-    MdFile(File file, int level) {
+    MdFile(File file, int level, String projectUrl) {
         this.file = file;
         this.level = level;
+        this.projectUrl = projectUrl;
     }
 
     /**
@@ -43,10 +45,9 @@ class MdFile {
     /**
      * 获取链接
      *
-     * @param projectUrl 项目url
      * @return md格式的链接
      */
-    String getLink(String projectUrl) {
+    String getLink() {
         return getTabs() + "- [" + file.getName() + "](" + projectUrl + getRelativePath() + ")";
     }
 }
