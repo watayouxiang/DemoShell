@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class MdFileTool {
         getFileStructure(inDir, 0, localFiles);
         //获取字符串列表
         List<String> linkList = getStringList(localFiles, data.getProjectUrl());
+        Collections.sort(linkList);
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
         saveStringList(linkList, outFile);
