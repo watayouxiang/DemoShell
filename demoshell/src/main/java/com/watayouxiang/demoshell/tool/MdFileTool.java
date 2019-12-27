@@ -17,16 +17,18 @@ public class MdFileTool {
      * @param data 一些配置数据
      */
     public void start(MdFileData data) {
-        //获取 inDir 的目录结构
-        File inDir = new File(data.getInDirPath());
-        LinkedList<MdFile> inFiles = new LinkedList<>();
-        getFileList(inDir, 0, inFiles);
-        Collections.sort(inFiles);
+        //获取 inDir 下的所有文件
+        File inFile = new File(data.getInDirPath());
+        LinkedList<MdFile> inFileList = new LinkedList<>();
+        getFileList(inFile, 0, inFileList);
+        Collections.sort(inFileList);
+
         //获取字符串列表
-        List<String> linkList = getStringList(inFiles, data.getProjectUrl());
+        List<String> linkList = getStringList(inFileList, data.getProjectUrl());
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
         saveStringList(linkList, outFile);
+
         //打印回显
         for (String string : linkList) {
             System.out.println(string);
