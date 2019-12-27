@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,40 +16,40 @@ public class MdFileTool {
      * @param data 一些配置数据
      */
     public void start(MdFileData data) {
-        //获取 inDir 下的所有文件
+        //获取所有文件
         File inFile = new File(data.getInDirPath());
-        LinkedList<MdFile> inFileList = new LinkedList<>();
+        List<MdFile> inFileList = new LinkedList<>();
         getFileList(inFile, 0, inFileList);
-        Collections.sort(inFileList);
 
-        //获取字符串列表
-        List<String> linkList = getStringList(inFileList, data.getProjectUrl());
+        //获取MD链接字符串列表
+        List<String> mdLinkList = getMdLinkList(inFileList, data.getProjectUrl());
+
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
-        saveStringList(linkList, outFile);
+        saveStringList(mdLinkList, outFile);
 
         //打印回显
-        for (String string : linkList) {
+        for (String string : mdLinkList) {
             System.out.println(string);
         }
         System.out.println("文件输出路径：" + outFile.getAbsoluteFile());
     }
 
     /**
-     * 获取字符串列表
+     * 获取MD链接列表
      *
-     * @param localFiles 本地文件集合
-     * @param projectUrl 项目的 url
-     * @return 字符串列表
+     * @param inFileList MD文件列表
+     * @param projectUrl 项目的URL
+     * @return MD链接列表
      */
-    private List<String> getStringList(LinkedList<MdFile> localFiles, String projectUrl) {
-        if (localFiles == null) return new ArrayList<>();
-        List<String> stringList = new ArrayList<>();
-        for (MdFile localFile : localFiles) {
-            String linkTxt = localFile.getLink(projectUrl);
-            stringList.add(linkTxt);
+    private List<String> getMdLinkList(List<MdFile> inFileList, String projectUrl) {
+        if (inFileList == null) return null;
+        List<String> mdLinkList = new ArrayList<>(inFileList.size());
+        for (MdFile mdFile : inFileList) {
+            String link = mdFile.getLink(projectUrl);
+            mdLinkList.add(link);
         }
-        return stringList;
+        return mdLinkList;
     }
 
     /**
