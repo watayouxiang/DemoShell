@@ -44,7 +44,7 @@ class MdFile implements Comparable<MdFile> {
      * 获取链接
      *
      * @param projectUrl 项目url
-     * @return 链接
+     * @return md格式的链接
      */
     String getLink(String projectUrl) {
         return getTabs() + "- [" + file.getName() + "](" + projectUrl + getRelativePath() + ")";
