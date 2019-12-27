@@ -19,11 +19,11 @@ public class MdFileTool {
     public void start(MdFileData data) {
         //获取 inDir 的目录结构
         File inDir = new File(data.getInDirPath());
-        LinkedList<MdFile> localFiles = new LinkedList<>();
-        getFileStructure(inDir, 0, localFiles);
-        Collections.sort(localFiles);
+        LinkedList<MdFile> inFiles = new LinkedList<>();
+        getFileList(inDir, 0, inFiles);
+        Collections.sort(inFiles);
         //获取字符串列表
-        List<String> linkList = getStringList(localFiles, data.getProjectUrl());
+        List<String> linkList = getStringList(inFiles, data.getProjectUrl());
         //保存目录结构到 outFile
         File outFile = new File(data.getOutFilePath());
         saveStringList(linkList, outFile);
@@ -80,22 +80,23 @@ public class MdFileTool {
     }
 
     /**
-     * 获取 file 的目录结构，保存到 localFiles 中
+     * 获取file下的所有文件，保存到fileList中
      *
-     * @param file       文件或者目录
-     * @param level      初始层级
-     * @param localFiles 本地文件集合
+     * @param file     文件
+     * @param level    初始层级
+     * @param fileList 文件集合
      */
-    private void getFileStructure(File file, int level, List<MdFile> localFiles) {
-        localFiles.add(new MdFile(file, level));
+    private void getFileList(File file, int level, List<MdFile> fileList) {
+        fileList.add(new MdFile(file, level));
         level++;
+
         // 当file不为目录 或者 报SecurityException错时，返回为null
         File[] files = file.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                // 如果目录下还有目录，那么递归遍历
-                getFileStructure(f, level, localFiles);
-            }
+        if (files == null) return;
+
+        for (File f : files) {
+            // 如果目录下还有目录，那么递归遍历
+            getFileList(f, level, fileList);
         }
     }
 }
