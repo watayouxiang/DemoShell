@@ -16,21 +16,20 @@ public class MdFileTool {
      * @param data 一些配置数据
      */
     public void start(MdFileData data) {
-        //获取所有文件
+        // 获取所有文件
         File inFile = new File(data.getInDirPath());
         List<MdFile> inFileList = new LinkedList<>();
         getFileList(inFile, 0, inFileList);
 
-        //获取MD链接字符串列表
+        // 获取MD链接字符串列表
         List<String> mdLinkList = getMdLinkList(inFileList, data.getProjectUrl());
 
-        //保存目录结构到 outFile
-        File outFile = new File(data.getOutFilePath());
-        saveStringList(mdLinkList, outFile);
+        // 保存目录结构到 outFile
+        File outFile = saveMdLinkList(mdLinkList, data.getOutFilePath());
 
-        //打印回显
-        for (String string : mdLinkList) {
-            System.out.println(string);
+        // 打印回显
+        for (String mdLink : mdLinkList) {
+            System.out.println(mdLink);
         }
         System.out.println("文件输出路径：" + outFile.getAbsoluteFile());
     }
@@ -53,31 +52,34 @@ public class MdFileTool {
     }
 
     /**
-     * 将 stringList 保存到 file 中
+     * 将MD链接字符串列表保存成文件
      *
-     * @param stringList 字符串列表
-     * @param file       存储文件
+     * @param mdLinkList  MD链接字符串列表
+     * @param outFilePath 输出文件路径
+     * @return 文件
      */
-    private void saveStringList(List<String> stringList, File file) {
-        BufferedWriter bufferedWriter = null;
+    private File saveMdLinkList(List<String> mdLinkList, String outFilePath) {
+        File outFile = new File(outFilePath);
+        BufferedWriter writer = null;
         try {
-            bufferedWriter = new BufferedWriter(new FileWriter(file));
-            for (String string : stringList) {
-                bufferedWriter.write(string);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+            writer = new BufferedWriter(new FileWriter(outFile));
+            for (String mdLink : mdLinkList) {
+                writer.write(mdLink);
+                writer.newLine();
+                writer.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (bufferedWriter != null) {
+            if (writer != null) {
                 try {
-                    bufferedWriter.close();
+                    writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+        return outFile;
     }
 
     /**
