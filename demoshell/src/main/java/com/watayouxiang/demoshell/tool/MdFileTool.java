@@ -47,7 +47,7 @@ public class MdFileTool {
         if (localFiles == null) return new ArrayList<>();
         List<String> stringList = new ArrayList<>();
         for (MdFile localFile : localFiles) {
-            String linkTxt = localFile.getLinkTxt(projectUrl);
+            String linkTxt = localFile.getLink(projectUrl);
             stringList.add(linkTxt);
         }
         return stringList;

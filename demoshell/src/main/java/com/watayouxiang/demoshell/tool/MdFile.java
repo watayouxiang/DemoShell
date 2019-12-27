@@ -12,28 +12,32 @@ class MdFile implements Comparable<MdFile> {
     }
 
     /**
-     * 获取目录层级标识
+     * 获取层级标识
+     *
+     * @return 一个 "level" 对应一个 "tab"
      */
-    private String getTab() {
-        StringBuilder sb = new StringBuilder();
+    private String getTabs() {
+        StringBuilder builder = new StringBuilder();
         for (int x = 0; x < level; x++) {
-            sb.append("\t");
+            builder.append("\t");
         }
-        return sb.toString();
+        return builder.toString();
     }
 
     /**
-     * 获取文件的相对路径
+     * 获取文件相对路径
      *
      * @return 文件相对路径
      */
-    private String getFileRelativePath() {
-        String fileAbsolutePath = file.getAbsolutePath();
+    private String getRelativePath() {
+        String absolutePath = file.getAbsolutePath();
         String projectPath = System.getProperty("user.dir");
         if (projectPath == null) {
-            throw new RuntimeException("-- projectPath is null --");
+            throw new NullPointerException("projectPath is null");
         }
-        return fileAbsolutePath.substring(projectPath.length());
+        String relativePath = absolutePath.substring(projectPath.length());
+        relativePath = relativePath.replace(File.separator, "/");
+        return relativePath;
     }
 
     /**
@@ -42,10 +46,8 @@ class MdFile implements Comparable<MdFile> {
      * @param projectUrl 项目url
      * @return 链接
      */
-    String getLinkTxt(String projectUrl) {
-        String fileRelativePath = getFileRelativePath();
-        fileRelativePath = fileRelativePath.replace(File.separator, "/");
-        return getTab() + "- [" + file.getName() + "](" + projectUrl + fileRelativePath + ")";
+    String getLink(String projectUrl) {
+        return getTabs() + "- [" + file.getName() + "](" + projectUrl + getRelativePath() + ")";
     }
 
     @Override
