@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class MdFileTool {
         File inFile = new File(data.getInDirPath());
         List<MdFile> files = new LinkedList<>();
         getFiles(inFile, 0, data.getProjectUrl(), files);
+        Collections.sort(files);
 
         // 获取MD行数据
         List<String> lines = getLines(files);
