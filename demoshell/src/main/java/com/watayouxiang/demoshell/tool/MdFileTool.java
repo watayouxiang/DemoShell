@@ -5,7 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class MdFileTool {
         File inFile = new File(data.getInDirPath());
         List<MdFile> files = new LinkedList<>();
         getFiles(inFile, 0, data.getProjectUrl(), files);
-        Collections.sort(files);
 
         // 获取MD行数据
         List<String> lines = getLines(files);
@@ -98,6 +98,13 @@ public class MdFileTool {
         // 当file不为目录 或者 报SecurityException错时，返回为null
         File[] files = file.listFiles();
         if (files == null) return;
+
+        Arrays.sort(files, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
 
         for (File f : files) {
             // 如果目录下还有目录，那么递归遍历
